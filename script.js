@@ -7,7 +7,44 @@
         let isCustomEquation = false;
         let factorizationCorrect = false;
         let currentMode = 'factorization'; // 'factorization', 'roots', 'custom'
+
+// Configurar inputs para solo aceptar números positivos en ecuación personalizada
+function configurarInputsPositivos() {
+    const inputB = document.getElementById('customB');
+    const inputC = document.getElementById('customC');
+    
+    if (inputB && inputC) {
+        // Asegurar que solo acepten valores positivos
+        inputB.min = 0;
+        inputC.min = 0;
         
+        // Validar en tiempo real
+        inputB.addEventListener('input', function() {
+            if (this.value < 0) {
+                this.value = Math.abs(this.value);
+            }
+        });
+        
+        inputC.addEventListener('input', function() {
+            if (this.value < 0) {
+                this.value = Math.abs(this.value);
+            }
+        });
+        
+        // También prevenir entrada de negativo con teclado
+        inputB.addEventListener('keydown', function(e) {
+            if (e.key === '-') {
+                e.preventDefault();
+            }
+        });
+        
+        inputC.addEventListener('keydown', function(e) {
+            if (e.key === '-') {
+                e.preventDefault();
+            }
+        });
+    }
+}
         // Elementos del DOM
         const equationElement = document.getElementById('equation');
         const customEquationInputs = document.getElementById('customEquationInputs');
@@ -354,6 +391,9 @@
             feedbackElement.className = 'feedback';
             discriminantInfo.classList.add('hidden');
             isCustomEquation = true;
+    
+            // Configurar inputs para solo positivos
+            setTimeout(configurarInputsPositivos, 100);
         }
         
         // Deshabilitar entrada de ecuación personalizada
@@ -364,7 +404,7 @@
         
         // Verificar ecuación personalizada
         function checkCustomEquation() {
-            // Obtener valores
+            // Obtener valores (b y c siempre serán positivos por la validación)
             const aSign = customASign.value;
             const aValue = parseInt(customA.value) || 1;
             const bSign = customBSign.value;
@@ -375,6 +415,13 @@
             // Validar entrada
             if (aValue < 1) {
                 feedbackElement.textContent = 'El coeficiente de x² debe ser mayor a 0.';
+                feedbackElement.className = 'feedback incorrect';
+                return;
+            }
+    
+            // Validar que b y c sean números válidos (positivos)
+            if (bValue < 0 || cValue < 0) {
+                feedbackElement.textContent = 'Los coeficientes b y c deben ser números positivos. El signo se selecciona con las opciones + o -.';
                 feedbackElement.className = 'feedback incorrect';
                 return;
             }
@@ -525,11 +572,14 @@
             generateEquation();
             setupCollapsibleMenus();
             setupEventListeners();
-            
-            // Actualizar estadísticas iniciales
-            scoreElement.textContent = score;
-            correctCountElement.textContent = correctCount;
-            attemptsElement.textContent = attempts;
+    
+            // Configurar inputs positivos para ecuación personalizada
+            configurarInputsPositivos();
+    
+           // Actualizar estadísticas iniciales
+           scoreElement.textContent = score;
+           correctCountElement.textContent = correctCount;
+           attemptsElement.textContent = attempts;
         }
         
         // Iniciar el juego cuando se carga la página
