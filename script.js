@@ -10,35 +10,28 @@ let currentMode = "factorization"; // 'factorization', 'roots', 'custom'
 
 // Sistema de sonidos
 const sounds = {
-  click: new Howl({
-    src: ["https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"],
-    volume: 0.5,
-  }),
-  correct: new Howl({
-    src: [
-      "https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3",
-    ],
-    volume: 0.7,
-  }),
-  incorrect: new Howl({
-    src: [
-      "https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3",
-    ],
-    volume: 0.5,
-  }),
-  win: new Howl({
-    src: [
-      "https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3",
-    ],
-    volume: 0.6,
-  }),
-  next: new Howl({
-    src: [
-      "https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3",
-    ],
-    volume: 0.5,
-  }),
+    click: new Howl({
+        src: ['/sound/click.wav'], // Agrega OGG para mayor compatibilidad
+        volume: 0.3
+    }),
+    correct: new Howl({
+        src: ['/sound/correcto.wav'],
+        volume: 0.7
+    }),
+    incorrect: new Howl({
+        src: ['/sound/incorect.wav'],
+        volume: 0.5
+    }),
+    win: new Howl({
+        src: ['/sound/win.mp3'],
+        volume: 0.6
+    }),
+    next: new Howl({
+        src: ['/sound/next.ogg'],
+        volume: 0.5
+    })
 };
+
 
 // Función para reproducir sonidos
 function playSound(soundName) {
