@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorización Cuadrática - Juego Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Factorización Cuadrática</h1>
+        <p>¡Aprende a factorizar ecuaciones cuadráticas de forma divertida!</p>
+    </header>
+    
+    <div class="container">
+        <div class="game-area">
+            <div class="equation-display" id="equation">x² + 5x + 6 = 0</div>
+            
+            <div class="equation-inputs hidden" id="customEquationInputs">
+                <select class="sign-input" id="customA-sign">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+                <input type="number" class="number-input" id="customA" placeholder="1" min="1" value="1">
+                <span>x²</span>
+                <select class="sign-input" id="customB-sign">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+                <input type="number" class="number-input" id="customB" placeholder="5" value="5">
+                <span>x</span>
+                <select class="sign-input" id="customC-sign">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+                <input type="number" class="number-input" id="customC" placeholder="6" value="6">
+                <span>= 0</span>
+            </div>
+            
+            <div class="factor-inputs" id="factorInputs">
+                <span>(x</span>
+                <select class="sign-input" id="sign1">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+                <input type="number" class="number-input" id="factor1" placeholder="?" min="1">
+                <span>)(x</span>
+                <select class="sign-input" id="sign2">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
+                <input type="number" class="number-input" id="factor2" placeholder="?" min="1">
+                <span>) = 0</span>
+            </div>
+            
+            <div class="roots-inputs hidden" id="rootsInputs">
+                <h3>Encuentra las raíces de la ecuación:</h3>
+                <div class="root-input-group">
+                    <span id="root1Equation">x + 5 = 0</span>
+                    <span>→ x =</span>
+                    <input type="number" class="root-input" id="root1" placeholder="?">
+                </div>
+                <div class="root-input-group">
+                    <span id="root2Equation">x - 3 = 0</span>
+                    <span>→ x =</span>
+                    <input type="number" class="root-input" id="root2" placeholder="?">
+                </div>
+            </div>
+            
+            <div class="feedback" id="feedback"></div>
+            <div class="discriminant-info hidden" id="discriminantInfo"></div>
+            
+            <div class="buttons">
+                <button class="check-btn" id="checkBtn">Verificar</button>
+                <button class="hint-btn" id="hintBtn">Pista</button>
+                <button class="next-btn" id="nextBtn">Siguiente</button>
+                <button class="custom-btn" id="customBtn">Ingresar Ecuación</button>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="score">0</div>
+                    <div>Puntuación</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div>Correctas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="attempts">0</div>
+                    <div>Intentos</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tutorial collapsed">
+            <h3>¿Cómo factorizar ecuaciones cuadráticas?</h3>
+            <div class="tutorial-content">
+                <p>Una ecuación cuadrática tiene la forma: <strong>ax² + bx + c = 0</strong></p>
+                <p>Para factorizarla, buscamos dos números que:</p>
+                <div class="example">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>Multiplicados den <strong>a × c</strong></div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Sumados den <strong>b</strong></div>
+                    </div>
+                </div>
+                <p><strong>Ejemplo:</strong> Factorizar x² + 5x + 6 = 0</p>
+                <div class="example">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>a × c = 1 × 6 = 6</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>Buscamos dos números que multiplicados den 6 y sumados den 5</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>Los números son 2 y 3 (2 × 3 = 6, 2 + 3 = 5)</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>La factorización es: (x + 2)(x + 3) = 0</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div>Las raíces son: x + 2 = 0 → x = -2 y x + 3 = 0 → x = -3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls collapsed">
+            <h3>Instrucciones del juego</h3>
+            <div class="controls-content">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>Selecciona el signo e ingresa el número correcto en cada espacio para factorizar la ecuación</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>Haz clic en "Verificar" para comprobar tu respuesta</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>Usa "Pista" si necesitas ayuda</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>Haz clic en "Siguiente" para pasar a una nueva ecuación</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>Usa "Ingresar Ecuación" para crear tu propia ecuación cuadrática</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div>Después de factorizar correctamente, encontrarás las raíces de la ecuación</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="author-credit">
+        <p>Autores <span class="author-name">JIMMY MEZA BAUTISTA - MATEMATICA BASICA</span> - 
+           <span id="current-year"></span></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
