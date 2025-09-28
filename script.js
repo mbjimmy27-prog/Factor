@@ -11,23 +11,23 @@ let currentMode = "factorization"; // 'factorization', 'roots', 'custom'
 // Sistema de sonidos
 const sounds = {
     click: new Howl({
-        src: ['/sound/click.wav'], // Agrega OGG para mayor compatibilidad
+        src: ['sound/click.wav'], // Agrega OGG para mayor compatibilidad
         volume: 0.3
     }),
     correct: new Howl({
-        src: ['/sound/correcto.wav'],
+        src: ['sound/correcto.wav'],
         volume: 0.7
     }),
     incorrect: new Howl({
-        src: ['/sound/incorect.wav'],
+        src: ['sound/incorect.wav'],
         volume: 0.5
     }),
     win: new Howl({
-        src: ['/sound/win.mp3'],
+        src: ['sound/win.mp3'],
         volume: 0.6
     }),
     next: new Howl({
-        src: ['/sound/next.ogg'],
+        src: ['sound/next.ogg'],
         volume: 0.5
     })
 };
